@@ -26,11 +26,9 @@ namespace PracticePizzaPlace.Data
                 new Employee {FirstName = "Italiano", LastName = "Sausage", PhoneNumber = "123-123-1234", Role = Roles.Driver, Salary = 40000M},
             };
 
-            foreach (Employee employee in employees)
-            {
-                context.Employees.AddRange(employees);
+            context.Employees.AddRange(employees);
+            context.SaveChanges();
 
-            }
         }
     }
 }

@@ -10,22 +10,22 @@ using PracticePizzaPlace.Models;
 
 namespace PracticePizzaPlace.Controllers
 {
-    public class EmployeesController : Controller
+    public class EmployeeController : Controller
     {
         private readonly PizzaContext _context;
 
-        public EmployeesController(PizzaContext context)
+        public EmployeeController(PizzaContext context)
         {
             _context = context;
         }
 
-        // GET: Employees
+        // GET: Employee
         public async Task<IActionResult> Index()
         {
             return View(await _context.Employees.ToListAsync());
         }
 
-        // GET: Employees/Details/5
+        // GET: Employee/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,13 +43,13 @@ namespace PracticePizzaPlace.Controllers
             return View(employee);
         }
 
-        // GET: Employees/Create
+        // GET: Employee/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Employees/Create
+        // POST: Employee/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -65,7 +65,7 @@ namespace PracticePizzaPlace.Controllers
             return View(employee);
         }
 
-        // GET: Employees/Edit/5
+        // GET: Employee/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,7 +81,7 @@ namespace PracticePizzaPlace.Controllers
             return View(employee);
         }
 
-        // POST: Employees/Edit/5
+        // POST: Employee/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -116,7 +116,7 @@ namespace PracticePizzaPlace.Controllers
             return View(employee);
         }
 
-        // GET: Employees/Delete/5
+        // GET: Employee/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,7 +134,7 @@ namespace PracticePizzaPlace.Controllers
             return View(employee);
         }
 
-        // POST: Employees/Delete/5
+        // POST: Employee/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
