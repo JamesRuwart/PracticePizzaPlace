@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PracticePizzaPlace.Data;
 using PracticePizzaPlace.Models;
+using PracticePizzaPlace.ViewModels;
 
 namespace PracticePizzaPlace.Controllers
 {
@@ -46,7 +47,21 @@ namespace PracticePizzaPlace.Controllers
         // GET: Orders/Create
         public IActionResult Create()
         {
-            return View();
+            OrderAddViewModel vm = new OrderAddViewModel();
+            List<SelectListItem> customerList = new List<SelectListItem>();
+
+            foreach (Customer customer in _context.Customers)
+            {
+                SelectListItem sli = new SelectListItem();
+                sli.Text = customer.FisrtName + " " + customer.LastName;
+                sli.Value = customer.ID.ToString();
+
+                customerList.Add(sli);
+            }
+
+            vm.CustomerList = customerList;
+
+            return View(vm);
         }
 
         // POST: Orders/Create
@@ -54,7 +69,7 @@ namespace PracticePizzaPlace.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,OrderType,DriverIn,DriverOut")] Order order)
+        public async Task<IActionResult> Create([Bind("ID,OrderType")] Order order)
         {
             if (ModelState.IsValid)
             {

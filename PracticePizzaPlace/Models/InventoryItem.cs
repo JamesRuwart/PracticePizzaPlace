@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PracticePizzaPlace.Models
 {
-    public enum OrderItemDetailType
+    public enum InventoryItemType
     {
         Size,
         Flavor,
@@ -15,13 +15,13 @@ namespace PracticePizzaPlace.Models
         Crust
 
     }
-
-    public class OrderItemDetail
+    public class InventoryItem
     {
         public int ID { get; set; }
-        public OrderItemDetailType Type { get; set; }
-
-        //public InventoryItem Item { get; set; }
+        public string Name { get; set; }
+        public InventoryItemType Type { get; set; }
+        public int QuantityRemaining { get; set; }
+        public decimal PricePerUnit { get; set; }
 
     }
 }
