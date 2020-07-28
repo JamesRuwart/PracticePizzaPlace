@@ -25,7 +25,8 @@ namespace PracticePizzaPlace.Models
         public DateTime? DriverOut { get; set; }
         public DateTime? DriverIn { get; set; }
         
-        IEnumerable<OrderItem> OrderItems { get; set; }
+
+        public IEnumerable<OrderItem> OrderItems { get; set; }
 
     }
 }

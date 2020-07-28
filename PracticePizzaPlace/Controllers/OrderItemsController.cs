@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PracticePizzaPlace.Data;
 using PracticePizzaPlace.Models;
+using PracticePizzaPlace.ViewModels;
 
 namespace PracticePizzaPlace.Controllers
 {
@@ -46,7 +47,9 @@ namespace PracticePizzaPlace.Controllers
         // GET: OrderItems/Create
         public IActionResult Create()
         {
-            return View();
+            OrderItemAddViewModel vm = new OrderItemAddViewModel();
+            vm.InventoryList = new List<SelectListItem>();
+            return View(vm);
         }
 
         // POST: OrderItems/Create
@@ -148,6 +151,27 @@ namespace PracticePizzaPlace.Controllers
         private bool OrderItemExists(int id)
         {
             return _context.OrderItems.Any(e => e.ID == id);
+        }
+
+
+        //GetInventoryItems
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> GetInventoryItems([Bind("InventoryItemType")] OrderItemAddViewModel orderItemVM)
+        {   
+            List<InventoryItem> inventoryItems = _context.InventoryItems.Where(i => i.Type == orderItemVM.InventoryItemType).ToList();
+            var inventoryItemsList = new List<SelectListItem>();
+
+            foreach (InventoryItem item in inventoryItems)
+            {
+                SelectListItem sli = new SelectListItem();
+                sli.Text = item.Name;
+                sli.Value = item.ID.ToString();
+                inventoryItemsList.Add(sli);
+            }
+
+            orderItemVM.InventoryList = inventoryItemsList;
+            return RedirectToAction("Create", "OrderItems", orderItemVM);
         }
     }
 }

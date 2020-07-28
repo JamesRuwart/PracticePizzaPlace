@@ -13,13 +13,16 @@ namespace PracticePizzaPlace.ViewModels
     {
         public int OrderID { get; set; }
         
-        [Required]
+        
         [DisplayName("Customer")]
         public int CustomerID { get; set; }
 
-        [Required]
+        
         [DisplayName("Order Type")]
         public OrderType OrderType { get; set; }
+
+        public int InventoryID { get; set; }
+
         public IEnumerable<OrderItem> OrderItems { get; set; }
 
         public IEnumerable<SelectListItem> CustomerList { get; set; }

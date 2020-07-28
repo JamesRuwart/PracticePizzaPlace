@@ -53,7 +53,7 @@ namespace PracticePizzaPlace.Controllers
             foreach (Customer customer in _context.Customers)
             {
                 SelectListItem sli = new SelectListItem();
-                sli.Text = customer.FisrtName + " " + customer.LastName;
+                sli.Text = customer.FirstName + " " + customer.LastName;
                 sli.Value = customer.ID.ToString();
 
                 customerList.Add(sli);
@@ -69,15 +69,20 @@ namespace PracticePizzaPlace.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,OrderType")] Order order)
+        public async Task<IActionResult> Create([Bind("ID,CustomerID,OrderType")] OrderAddViewModel orderVM)
         {
             if (ModelState.IsValid)
             {
+                Order order = new Order();
+                order.Customer = _context.Customers.FirstOrDefault(c => c.ID == orderVM.CustomerID);
+                order.OrderType = orderVM.OrderType;
+                order.OrderItems = new List<OrderItem>();
+
                 _context.Add(order);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(order);
+            return View(orderVM);
         }
 
         // GET: Orders/Edit/5
@@ -163,6 +168,14 @@ namespace PracticePizzaPlace.Controllers
         private bool OrderExists(int id)
         {
             return _context.Orders.Any(e => e.ID == id);
+        }
+
+
+        public async Task<IActionResult> AddItem()
+        {
+
+
+            return RedirectToAction("Create", "OrderItems");
         }
     }
 }

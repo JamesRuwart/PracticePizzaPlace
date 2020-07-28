@@ -12,6 +12,8 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @*Dropdown for Order Type*@
             <div class="form-group">
                 <label asp-for="OrderType" class="control-label"></label>
                 @Html.DropDownList("Order Type", Html.GetEnumSelectList(typeof(OrderType)),
@@ -19,17 +21,21 @@
                 <span asp-validation-for="OrderType" class="text-danger"></span>
             </div>
 
+            @*Dropdown for Customer Selection*@
             <div class="form-group">
                 <label asp-for="CustomerID" class="control-label"></label>
-                @Html.DropDownList("Customer ID", Model.CustomerList,
+                @Html.DropDownList("CustomerID", Model.CustomerList,
                "Select Customer", new { @class = "form-control" })
                 <span asp-validation-for="CustomerID" class="text-danger"></span>
             </div>
 
+            <div class="form-group">
+                <input type="submit" formaction="AddItem" value="Add Item" class="btn btn-info" />
+            </div>
 
             <div class="form-group">
                 @*select customer*@
-                <input type="submit" value="Select Customer" class="btn btn-primary" />
+                <input type="submit" formaction="Create" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>

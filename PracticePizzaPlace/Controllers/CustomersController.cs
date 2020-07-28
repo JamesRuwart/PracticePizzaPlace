@@ -54,7 +54,7 @@ namespace PracticePizzaPlace.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,FisrtName,LastName,StreetAddress,City,State,Zip")] Customer customer)
+        public async Task<IActionResult> Create([Bind("ID,FirstName,LastName,StreetAddress,City,State,Zip")] Customer customer)
         {
             if (ModelState.IsValid)
             {
