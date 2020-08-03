@@ -7,12 +7,12 @@ namespace PracticePizzaPlace.Models
 {
     public enum InventoryItemType
     {
-        Size,
-        Flavor,
-        Topping,
-        Sauce,
-        Cheese,
-        Crust
+        Size=1,
+        Flavor=2,
+        Topping=3,
+        Sauce=4,
+        Cheese=5,
+        Crust=6
 
     }
     public class InventoryItem

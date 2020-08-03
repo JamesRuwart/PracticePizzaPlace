@@ -157,7 +157,7 @@ namespace PracticePizzaPlace.Controllers
         //GetInventoryItems
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> GetInventoryItems([Bind("InventoryItemType")] OrderItemAddViewModel orderItemVM)
+        public IActionResult GetInventoryItems(OrderItemAddViewModel orderItemVM)
         {   
             List<InventoryItem> inventoryItems = _context.InventoryItems.Where(i => i.Type == orderItemVM.InventoryItemType).ToList();
             var inventoryItemsList = new List<SelectListItem>();
@@ -171,7 +171,14 @@ namespace PracticePizzaPlace.Controllers
             }
 
             orderItemVM.InventoryList = inventoryItemsList;
-            return RedirectToAction("Create", "OrderItems", orderItemVM);
+            return View("Create", orderItemVM);
+        }
+
+        public IActionResult AddInventoryItemToOrderItem (OrderItemAddViewModel OrderItemVM)
+        {
+            OrderItemVM.OrderItemDetails.Add(_context.InventoryItems.FirstOrDefault(i => i.ID == OrderItemVM.InventoryID));
+
+            return View("Create", OrderItemVM);
         }
     }
 }

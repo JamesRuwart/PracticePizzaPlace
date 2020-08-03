@@ -21,8 +21,6 @@ namespace PracticePizzaPlace.ViewModels
         [DisplayName("Order Type")]
         public OrderType OrderType { get; set; }
 
-        public int InventoryID { get; set; }
-
         public IEnumerable<OrderItem> OrderItems { get; set; }
 
         public IEnumerable<SelectListItem> CustomerList { get; set; }
